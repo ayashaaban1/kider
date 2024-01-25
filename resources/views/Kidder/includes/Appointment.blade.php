@@ -5,37 +5,53 @@
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                             <div class="h-100 d-flex flex-column justify-content-center p-5">
                                 <h1 class="mb-4">Make Appointment</h1>
-                                <form>
+                                <form action="{{ route('makeAppointment') }}" method="post">
+                                 @csrf
                                     <div class="row g-3">
                                         <div class="col-sm-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="gname" placeholder="Gurdian Name">
+                                                <input type="text" class="form-control border-0" id="gname" placeholder="Gurdian Name" name="gurdianName" value="{{ old('gurdianName') }}">
                                                 <label for="gname">Gurdian Name</label>
                                             </div>
+                                            @error('gurdianName')
+                                                 {{ $message }}
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-floating">
-                                                <input type="email" class="form-control border-0" id="gmail" placeholder="Gurdian Email">
+                                                <input type="email" class="form-control border-0" id="gmail" placeholder="Gurdian Email" name="gurdianEmail" value="{{ old('gurdianEmail') }}">
                                                 <label for="gmail">Gurdian Email</label>
                                             </div>
+                                            @error('gurdianEmail')
+                                                 {{ $message }}
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="cname" placeholder="Child Name">
+                                                <input type="text" class="form-control border-0" id="cname" placeholder="Child Name" name="childName" value="{{ old('childName') }}">
                                                 <label for="cname">Child Name</label>
                                             </div>
+                                            @error('childName')
+                                                 {{ $message }}
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control border-0" id="cage" placeholder="Child Age">
+                                                <input type="text" class="form-control border-0" id="cage" placeholder="Child Age" name="childAge" value="{{ old('childAge') }}">
                                                 <label for="cage">Child Age</label>
                                             </div>
+                                            @error('childAge')
+                                                {{ $message }}
+                                            @enderror
                                         </div>
                                         <div class="col-12">
                                             <div class="form-floating">
-                                                <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                                <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px" name="message">{{ old('message') }}</textarea>
                                                 <label for="message">Message</label>
                                             </div>
+                                            @error('message')
+                                                {{ $message }}
+                                            @enderror
                                         </div>
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>

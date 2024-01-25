@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +31,10 @@ Route::get('teacher',[Controller::class,'teacher'])->name('teacher');
 Route::get('beTeacher',[Controller::class,'call'])->name('beTeacher');
 Route::get('appointment',[Controller::class,'appointment'])->name('appointment');
 Route::get('testimonial',[Controller::class,'testimonial'])->name('testimonial');
+//route form
+Route::post('send-mail', [ContactController::class, 'store'])->name('send-mail');
+Route::post('makeAppointment', [AppointmentController::class, 'store'])->name('makeAppointment');
+//
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

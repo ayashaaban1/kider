@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Testimonial;
+use App\Models\Teacher;
+use App\Models\Subject;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -17,13 +19,19 @@ class Controller extends BaseController
     }
 
     public function index(){
-        return view('Kidder.index');
+        $teacher=Teacher::where("published",1)->get();
+        $subject=Subject::where("published",1)->get();
+        $test =Testimonial::where('published',1)->latest()->take(3)->get();
+        return view('Kidder.index',compact('test','subject','teacher'));
     }
     public function about(){
-        return view("Kidder.About");
+        $teacher=Teacher::where("published","1")->get();
+        return view("Kidder.About",compact("teacher"));
     }
     public function classes(){
-        return view("Kidder.classes");
+        $subject=Subject::where("published",1)->get();
+        $test =Testimonial::where('published',1)->latest()->take(3)->get();
+        return view("Kidder.classes",compact('test','subject'));
     }
     public function contact(){
         return view("Kidder.contact");
@@ -32,7 +40,8 @@ class Controller extends BaseController
         return view("Kidder.schoolFacilities");
     }
     public function teacher (){
-      return view("Kidder.teacher");
+        $teacher = Teacher::where('published', 1)->get();
+        return view("Kidder.teacher", compact('teacher'));
     }
     public function call (){
         return view("Kidder.beTeacher");
@@ -41,6 +50,7 @@ class Controller extends BaseController
         return view("Kidder.appointment");
     }
     public function testimonial()  {
-        return view("Kidder.Testimonial");
+        $test =Testimonial::where('published',1)->latest()->take(3)->get();
+        return view("Kidder.Testimonial",compact('test'));
     }
 }
